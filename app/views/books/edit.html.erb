@@ -1,0 +1,16 @@
+<div>
+  <% if user_signed_in? %>
+    <%= link_to "Home", user_path(current_user.id) %>
+    <%= link_to "Users", users_path %>
+    <%= link_to "Books", books_path %>
+  <% end %>
+</div>
+
+<h1>Editing Book</h1>
+<% form_with model: @book do |f| %>
+<p>Title</p>
+<%= f.text_field :title %>
+<p>Opinion</p>
+<%= f.text_area :body %>
+<%= f.submit 'Update Book' %>
+<% end %>

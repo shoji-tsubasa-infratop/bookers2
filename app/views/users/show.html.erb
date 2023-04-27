@@ -1,0 +1,21 @@
+<div>
+  <% if user_signed_in? %>
+    <%= link_to "Home", user_path(current_user.id) %>
+    <%= link_to "Users", users_path %>
+    <%= link_to "Books", books_path %>
+  <% end %>
+  <%= form_with model: @book, url: books_path, method: :post do |f| %>
+    <p>Title</p>
+    <%= f.text_field :title %>
+    <p>Opnion</p>
+    <%= f.text_area :body %>
+    <%= f.submit 'Create Book' %>
+  <% end %>
+</div>
+
+<h1>Books</h1>
+<% @my_books.each do |my_book| %>
+<%= link_to my_book.title, book_path(my_book.id) %>
+<%= my_book.body %>
+
+<% end %>
