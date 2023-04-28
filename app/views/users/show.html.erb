@@ -1,8 +1,28 @@
-<%= render partial: 'templates/template', locals: { book: @book , user: @user} %>
-<h1>Books</h1>
-<% @my_books.each do |my_book| %>
-<%= image_tag my_book.user.get_profile_image(100, 100) %>
-<%= link_to my_book.title, book_path(my_book.id) %>
-<%= my_book.body %>
-
-<% end %>
+<div class="container px-5 px-sm-0 mt-3">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render partial: 'templates/template', locals: { book: @book , user: @user} %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @my_books.each do |my_book| %>
+          <tr>
+            <td><%= image_tag my_book.user.get_profile_image(80, 80) %></td>
+            <td><%= link_to my_book.title, book_path(my_book.id) %></td>
+            <td><%= my_book.body %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

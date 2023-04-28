@@ -1,9 +1,24 @@
-<%= render partial: 'templates/template', locals: { book: @book , user: @user} %>
-<h1>Book detail</h1>
-<%= image_tag @my_book.user.get_profile_image(100, 100) %>
-<%= link_to @my_book.user.name, user_path(@my_book.user.id) %>
-
-<%= link_to @my_book.title, book_path(@my_book.id) %>
-<%= @my_book.body %>
-<%= link_to 'Edit', edit_book_path(@my_book.id) %>
-<%= link_to 'Destroy', book_path(@my_book.id), method: :delete, "data-confirm"=>"本当に消しますか？" %>
+<div class="container px-5 px-sm-0 mt-3">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render partial: 'templates/template', locals: { book: @book , user: @user} %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td style="display: flex; flex-direction: column;">
+              <%= image_tag @my_book.user.get_profile_image(80, 80) %>
+              <%= link_to @my_book.user.name, user_path(@my_book.user.id) %>
+            </td>
+            <td><%= link_to @my_book.title, book_path(@my_book.id) %></td>
+            <td><%= @my_book.body %></td>
+            <td><%= link_to 'Edit', edit_book_path(@my_book.id), class:"btn btn-success" %></td>
+            <td><%= link_to 'Destroy', book_path(@my_book.id), method: :delete, "data-confirm"=>"本当に消しますか？", class:"btn btn-danger" %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
