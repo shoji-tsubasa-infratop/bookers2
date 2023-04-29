@@ -1,14 +1,15 @@
 class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
   def show
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
     @book = Book.new
-    @my_books = Book.where(user_id: current_user.id)
+    @my_books = Book.where(user_id: params[:id])
   end
   
   def index
     @user = User.find(current_user.id)
     @users = User.all
+    @book = Book.new
   end
   
   def edit
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
       flash[:notice] = "You have updated user successfully."
       redirect_to user_path(@user.id)
     else
-      flash[:danger] = "error"
+      flash[:danger] = "is too short (minimum is 2 characters)"
       render :edit
     end
   end
