@@ -1,3 +1,6 @@
+<div>
+  <%= flash[:notice] %>
+</div>
 <div class="container px-5 px-sm-0 mt-3">
   <div class="row">
     <div class="col-md-3">
@@ -9,13 +12,21 @@
         <tbody>
           <tr>
             <td style="display: flex; flex-direction: column;">
-              <%= image_tag @my_book.user.get_profile_image(80, 80) %>
+              <%= image_tag @my_book.user.get_profile_image(80, 80), width: 100, height: 100 %>
               <%= link_to @my_book.user.name, user_path(@my_book.user.id) %>
             </td>
             <td><%= link_to @my_book.title, book_path(@my_book.id) %></td>
             <td><%= @my_book.body %></td>
-            <td><%= link_to 'Edit', edit_book_path(@my_book.id), class:"btn btn-success" %></td>
-            <td><%= link_to 'Destroy', book_path(@my_book.id), method: :delete, "data-confirm"=>"本当に消しますか？", class:"btn btn-danger" %></td>
+            <% if current_user.id == @my_book.user_id %>
+              <td>
+                <%= link_to 'Edit', edit_book_path(@my_book.id), class:"btn btn-success" %>
+              </td>
+            <% end %>
+            <% if current_user.id == @my_book.user_id %>
+              <td>
+              <%= link_to 'Destroy', book_path(@my_book.id), method: :delete, "data-confirm"=>"本当に消しますか？", class:"btn btn-danger" %>
+              </td>
+            <% end %>
           </tr>
         </tbody>
       </table>
